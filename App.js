@@ -3,26 +3,17 @@ import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { ScrollView, Switch, TextInput } from 'react-native-gesture-handler';
 import ListView from './componentns/List';
+import Userform from './componentns/userform';
 
 export default function App() {
-  const [state, setState] = useState({ name: 'Pariwesh', age: '20', isEnabled: true });  //setState('Pariwesh')
 
   return (
     <View style={styles.container}>
       <ScrollView >
-        <ListView></ListView>
-        <Text>UserForm</Text>
-        <TextInput onChangeText={text => setState({ name: text })} style={{ borderColor: 'red', width: 300, borderWidth: 2 }} value={state.name}></TextInput>
-        <Switch trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e" value={state.isEnabled}
-          onValueChange={(value) => setState({ isEnabled: value })}></Switch>
-        <Button title='Save' onPress={() => {
-          console.log('test');
-          alert(state);
-        }}></Button>
-        <StatusBar style="dark" />
+        <Userform></Userform>
       </ScrollView>
+      {/* <ListView></ListView> */}
+
     </View>
   );
 }
