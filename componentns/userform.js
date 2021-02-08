@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Button, StatusBar, StyleSheet, Switch, Text, View } from 'react-native';
+import { Button, StatusBar, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
 function Userform() {
-    const [state, setState] = useState({ name: 'Pariwesh', age: '20', isEnabled: true });  //setState('Pariwesh')
+    let initstate= useState({ name: 'Pariwesh', age: '20', isEnabled: true });  //setState1('Pariwesh');
+    console.log(initstate);
+    const [state, setState1] = initstate;
     function handlerSave() {
-        console.log('going to save',state);
+        console.log('going to save', state);
 
         fetch('https://601fbe59e3e55e0017f4784b.mockapi.io/users', {
             method: 'POST',
@@ -21,7 +23,7 @@ function Userform() {
             })
     }
     function update() {
-        console.log('test1222');
+        console.log('updating');
         fetch('https://601fbe59e3e55e0017f4784b.mockapi.io/users/2', {
             method: 'PUT',
             headers: {
@@ -37,7 +39,7 @@ function Userform() {
             })
     }
     function delete1() {
-        fetch('https://601fbe59e3e55e0017f4784b.mockapi.io/users/1', {
+        fetch('https://601fbe59e3e55e0017f4784b.mockapi.io/users/19', {
             method: 'DELETE',
         })
 
@@ -60,12 +62,25 @@ function Userform() {
     }
     return (<View>
         <Text>UserForm</Text>
-        <TextInput onChangeText={text => setState({ name: text })} style={{ borderColor: 'red', width: 300, borderWidth: 2 }}
+        <TextInput onChangeText={text => {
+            let newState =  {...state, name:text};// Object.assign(state, { name: text });
+            console.log(newState);
+            setState1(newState)
+        }} style={{ borderColor: 'red', width: 300, borderWidth: 2 }}
             value={state.name}></TextInput>
+        <TextInput textContentType='emailAddress' onChangeText={text => {
+            let newState =  {...state, age:text};// Object.assign(state, { name: text });
+           
+        //    let newState = Object.assign(state, { age: text });
+            console.log(newState);
+            setState1(newState)
+        }}
+            style={{ borderColor: 'red', width: 300, borderWidth: 2 }}
+            value={state.age}></TextInput>
         <Switch trackColor={{ false: "#767577", true: "#81b0ff" }}
             thumbColor={state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
             ios_backgroundColor="#3e3e3e" value={state.isEnabled}
-            onValueChange={(value) => setState({ isEnabled: value })}></Switch>
+            onValueChange={(value) => setState1({ isEnabled: value })}></Switch>
         <StatusBar style="dark" />
         <Button title='Save' onPress={() => {
             handlerSave();
@@ -81,7 +96,35 @@ function Userform() {
         <Button title='get' onPress={() => {
             get();
         }}></Button>
+        <TouchableOpacity
+               style = {styles.submitButton}
+               onPress = {
+                  () => handlerSave()
+               }>
+               <Text style = {styles.submitButtonText}> Submit </Text>
+            </TouchableOpacity>
     </View>)
 }
 
 export default Userform;
+
+const styles = StyleSheet.create({
+    container: {
+       paddingTop: 23
+    },
+    input: {
+       margin: 15,
+       height: 40,
+       borderColor: '#7a42f4',
+       borderWidth: 1
+    },
+    submitButton: {
+       backgroundColor: '#7a42f4',
+       padding: 10,
+       margin: 15,
+       height: 40,
+    },
+    submitButtonText:{
+       color: 'white'
+    }
+ })
