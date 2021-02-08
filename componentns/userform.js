@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Button, StatusBar, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import ListView from './List';
 
 function Userform() {
-    let initstate= useState({ name: 'Pariwesh', age: '20', isEnabled: true });  //setState1('Pariwesh');
+    let initstate= useState({ name: 'Pariwesh', age: '20', isEnabled: true,
+    users:  [
+        { 'name': 'Be1n', 'id': 1 }
+    ] });  //setState1('Pariwesh');
     console.log(initstate);
     const [state, setState1] = initstate;
     function handlerSave() {
@@ -17,7 +21,10 @@ function Userform() {
             body: JSON.stringify(state)
         })
             .then(response => response.json()).then(json => {
-                console.log(json)
+                console.log('saved',json)
+                
+                state.users.push(json);
+                setState1({...state, users:state.users})
             }).catch(error => {
                 console.log('failed'); console.log(error)
             })
@@ -103,6 +110,7 @@ function Userform() {
                }>
                <Text style = {styles.submitButtonText}> Submit </Text>
             </TouchableOpacity>
+            <ListView users={state.users}> </ListView>
     </View>)
 }
 
