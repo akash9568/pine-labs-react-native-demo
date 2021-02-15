@@ -4,13 +4,14 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { ScrollView, Switch, TextInput } from 'react-native-gesture-handler';
 import ContactList from './components/contactList';
 import Userform from './components/userform';
-
+import SMS1 from "./components/SMS";
 export default function App() {
   return (
     <View style={styles.container}>
       <ScrollView >
         {/* <Userform></Userform> */}
-        <ContactList></ContactList>
+        {/* <ContactList></ContactList> */}
+        <SMS1></SMS1>
       </ScrollView>
     </View>
   );
