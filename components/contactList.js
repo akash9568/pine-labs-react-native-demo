@@ -12,7 +12,7 @@ export default function ContactList(){
             if(status === 'granted'){
                 const {data} = await Contacts.getContactsAsync();
                 if(data.length> 0 ){
-                    console.log(data);
+                    // console.log(data);
                     setContacts(data);
                 }
             }
@@ -21,16 +21,18 @@ export default function ContactList(){
     }, []);
 
 
-    function showContacts(){
+    function showContactDetails(item){
+        alert(item.firstName)
     }
     return (
         <SafeAreaView>
             <View>
                 <Text>this is a ContactList</Text>
             </View>
-            <FlatList data={contacts} renderItem={(item)=> <View><Text>{item.item.firstName}</Text></View> }></FlatList>
+            <FlatList data={contacts} renderItem={(item)=> <View><Text onPress={showContactDetails.bind(this, item.item)}>{item.item.firstName}</Text>
+            </View> }></FlatList>
 
-            <Button onPress={showContacts} title='Show contacts' ></Button>
+        
         </SafeAreaView>
     )
 }
