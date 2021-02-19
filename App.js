@@ -1,14 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { ScrollView, Switch, TextInput } from 'react-native-gesture-handler';
-import ContactList from './components/contactList';
-import Userform from './components/userform';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import SMS1 from "./components/SMS";
+import LocationComponent from "./components/Location";
 export default function App() {
   return (
     <View style={styles.container}>
       <ScrollView >
+        <LocationComponent></LocationComponent>
+        {/* <FingerPrint></FingerPrint> */}
         {/* <Userform></Userform> */}
         {/* <ContactList></ContactList> */}
         <SMS1></SMS1>
