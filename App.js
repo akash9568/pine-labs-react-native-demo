@@ -9,7 +9,7 @@ import SqliteDemo from './components/SqliteDemo';
 import MapView from 'react-native-maps';
 import SendEmail from './components/SendEmail';
 import VibrationComponent from './components/vibrationDemo';
-
+import MapViewMarkerDemo from "./components/MapDemo";
 // import { Dimensions } from 'Dimensions';
 export default function App() {
   return (
@@ -22,9 +22,9 @@ export default function App() {
         {/* <SMS1></SMS1> */}
         {/* <CellularDemo></CellularDemo> */}
         {/* <SqliteDemo></SqliteDemo> */}
-        {/* <MapView style={styles.map}  /> */}
-        {/* <SendEmail></SendEmail> */}
-        <VibrationComponent></VibrationComponent>
+        <MapViewMarkerDemo style={styles.map}  />
+        {/* <SendEmail></SendEmail>
+        <VibrationComponent></VibrationComponent> */}
       </ScrollView>
     </View>
   );

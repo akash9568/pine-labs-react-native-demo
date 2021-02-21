@@ -19,7 +19,7 @@ export default class SendEmail extends React.Component {
             bcc: 'mee@mee.com', // string or array of email addresses
             subject: 'Show how to use',
             body: 'Some body right here'
-        }).catch(console.error)
+        }).then(value=> console.log(value)).catch(console.error)
     }
 }
  
