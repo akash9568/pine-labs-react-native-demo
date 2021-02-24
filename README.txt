@@ -1,7 +1,6 @@
 react-native run-android
 
-
-Pending:
-
-1. finger print authentication
-2. Device location
+implemented the following:
+1. send mail
+2. vibration
+3. Map with Markers
