@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ActivityIndicator, Button, StyleSheet, Text, View } from 'react-native';
 import { FlatList, ScrollView, Switch, TextInput } from 'react-native-gesture-handler';
 import APIService from '../services/APIService';
-
+import analytics from '@react-native-firebase/analytics';
 export default function Userform() {
     const [state, setState] = useState({
         userform: {
@@ -14,27 +14,35 @@ export default function Userform() {
         users: []
     });  //setState('Pariwesh')
 
-    (function () {
-        console.log('calling getUsers');
-        // if (state.users.length == 0) {
-        const promise = APIService.getAllUsers();
-        promise.then(response => response.json())
-            .then(users => setState({ ...state, users: users }))
-        promise.catch(error => {
-            console.log(error)
-        })
-        // }
-    })();
+    // (function () {
+    //     console.log('calling getUsers');
+    //     // if (state.users.length == 0) {
+    //     const promise = APIService.getAllUsers();
+    //     promise.then(response => response.json())
+    //         .then(users => setState({ ...state, users: users }))
+    //     promise.catch(error => {
+    //         console.log(error)
+    //     })
+    //     // }
+    // })();
 
 
-    const URL = "https://6020a98046f1e400178034c6.mockapi.io/api/v1/users";
+    const URL = "https://60393b51d2b9430017d23f48.mockapi.io/api/v1/users";
     function saveUser() {
+        //  analytics().logEvent('basket', {
+        //     id: 3745092,
+        //     item: 'mens grey t-shirt',
+        //     description: ['round neck', 'long sleeved'],
+        //     size: 'L',
+        //   }).then(response=> alert(response));
         const promise = APIService.saveUser(state.userform);
         promise.then(response => response.json()).then(user => {
             state.users.push(user);
             setState({ ...state, users: state.users });
         });
-        promise.catch(error => alert('Save operation failed'));
+        promise.catch(error => {
+            console.log(error); alert(error)
+        });
     }
     return (
 
@@ -55,12 +63,12 @@ export default function Userform() {
                 <Button title='Save' onPress={saveUser}></Button>
                 <StatusBar style="dark" />
             </ScrollView>
-            <FlatList data={state.users} renderItem={item => {
+            {/* <FlatList data={state.users} renderItem={item => {
                 return <View style={styles.userRow}><Text >{item.item.name}, {item.item.age}</Text>
                     <Button title='Delete' onPress={deleteUser.bind(this, item.item.id, item.index)}></Button>
                 </View>
             }}>
-            </FlatList>
+            </FlatList> */}
             <ActivityIndicator color="#0000ff" style={styles.container} size="large"></ActivityIndicator>
 
         </View>
